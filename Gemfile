@@ -22,6 +22,7 @@ gem 'rack-cors'
 
 # Use devise for user authentication
 gem 'devise'
+gem 'devise-jwt'
 
 # Use figaro for managing env variables
 gem 'figaro'

@@ -14,7 +14,7 @@ module RenioRails
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w[assets tasks])
+    config.autoload_lib(ignore: %w[assets tasks generators])
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -28,5 +28,19 @@ module RenioRails
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Don't generate system test files.
+    config.generators.system_tests = nil
+
+    # Default time zone
+    config.time_zone = 'America/Bogota'
+
+    # Active record default time zone
+    config.active_record.default_timezone = :utc
+
+    # Locales
+    config.i18n.available_locales = %i[en es]
+    config.i18n.default_locale = :en
+    config.i18n.fallbacks = [:en]
   end
 end
