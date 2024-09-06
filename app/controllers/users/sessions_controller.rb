@@ -3,7 +3,8 @@ module Users
     private
 
     def respond_with(resource, _options)
-      render json: { user: resource }, status: :created
+      data = { user: resource.serialized_hash }
+      render json: { data: }, status: :created
     end
 
     def respond_to_on_destroy

@@ -27,6 +27,7 @@
 #
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::Allowlist
+  include UserSerializer
 
   devise(
     :database_authenticatable,
