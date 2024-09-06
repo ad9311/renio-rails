@@ -28,6 +28,8 @@ Metrics/CyclomaticComplexity:
 
 Style/Documentation:
   Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
 
