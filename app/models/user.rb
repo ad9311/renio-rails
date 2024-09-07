@@ -39,4 +39,10 @@ class User < ApplicationRecord
     :jwt_authenticatable,
     jwt_revocation_strategy: self
   )
+
+  has_one :budget_account, dependent: :destroy
+
+  validates :name, length: { in: 1..50 }
+  validates :email, uniqueness: true
+  validates :username, length: { in: 1..20 }, uniqueness: true
 end
