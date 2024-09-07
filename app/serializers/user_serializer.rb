@@ -4,6 +4,6 @@ module UserSerializer
   private
 
   def attributes
-    { id: }
+    { id:, username:, name:, email:, image: }
   end
 end

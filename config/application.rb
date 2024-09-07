@@ -29,6 +29,11 @@ module RenioRails
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    # Sessions
+    config.session_store :cookie_store, key: '_interslice_session'
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use config.session_store, config.session_options
+
     # Don't generate system test files.
     config.generators.system_tests = nil
 
