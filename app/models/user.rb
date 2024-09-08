@@ -27,6 +27,7 @@
 #
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::Allowlist
+  include UserConcern
   include UserSerializer
 
   devise(
@@ -45,4 +46,6 @@ class User < ApplicationRecord
   validates :name, length: { in: 1..50 }
   validates :email, uniqueness: true
   validates :username, length: { in: 1..20 }, uniqueness: true
+
+  after_create :set_up_user
 end
