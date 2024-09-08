@@ -27,4 +27,5 @@
 #
 class Budget < ApplicationRecord
   belongs_to :budget_account
+  has_many :incomes, dependent: :destroy
 end
