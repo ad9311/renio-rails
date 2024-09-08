@@ -10,4 +10,10 @@ Rails.application.routes.draw do
       get 'me', to: 'users#me'
     end
   end
+
+  scope :api do
+    # Budgets
+    resources :budgets, param: :uid, only: %i[index show create]
+    get 'current', to: 'budgets#current', as: :current_budget
+  end
 end

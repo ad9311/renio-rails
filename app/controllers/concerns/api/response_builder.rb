@@ -6,7 +6,7 @@ module Api::ResponseBuilder
     response
   end
 
-  def build_error_response(status, message: nil, errors: [])
-    { status:, message:, errors: }
+  def build_error_response(status, errors: [])
+    { status:, errors: }
   end
 end
