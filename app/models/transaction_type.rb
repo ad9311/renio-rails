@@ -21,4 +21,5 @@
 class TransactionType < ApplicationRecord
   belongs_to :budget_account
   has_many :incomes, dependent: :destroy
+  has_many :expenses, dependent: :destroy
 end

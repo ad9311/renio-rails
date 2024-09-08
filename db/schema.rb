@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_08_143016) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_08_143935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_143016) do
     t.datetime "updated_at", null: false
     t.index ["budget_account_id"], name: "index_budgets_on_budget_account_id"
     t.index ["uid"], name: "index_budgets_on_uid", unique: true
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.bigint "budget_id", null: false
+    t.bigint "transaction_type_id", null: false
+    t.string "description", null: false
+    t.decimal "amount", precision: 11, scale: 2, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_id"], name: "index_expenses_on_budget_id"
+    t.index ["transaction_type_id"], name: "index_expenses_on_transaction_type_id"
   end
 
   create_table "incomes", force: :cascade do |t|
@@ -94,6 +105,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_143016) do
   add_foreign_key "allowlisted_jwts", "users", on_delete: :cascade
   add_foreign_key "budget_accounts", "users"
   add_foreign_key "budgets", "budget_accounts"
+  add_foreign_key "expenses", "budgets"
+  add_foreign_key "expenses", "transaction_types"
   add_foreign_key "incomes", "budgets"
   add_foreign_key "incomes", "transaction_types"
   add_foreign_key "transaction_types", "budget_accounts"
