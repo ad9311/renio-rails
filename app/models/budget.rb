@@ -26,7 +26,26 @@
 #  fk_rails_...  (budget_account_id => budget_accounts.id)
 #
 class Budget < ApplicationRecord
+  validates :uid, uniqueness: true
+  validates :balance, numericality: true
+  validates(
+    :year,
+    numericality: { only_integer: true, greater_than_or_equal_to: 2000, less_than_or_equal_to: Time.zone.now.year }
+  )
+  validates(
+    :month,
+    numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 12 }
+  )
+
   belongs_to :budget_account
   has_many :incomes, dependent: :destroy
   has_many :expenses, dependent: :destroy
+
+  before_save :set_uid
+
+  private
+
+  def set_uid
+    self.uid = "#{budget_account.id}_#{year}_#{month.to_s.rjust(2, '0')}"
+  end
 end

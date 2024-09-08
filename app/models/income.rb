@@ -21,6 +21,9 @@
 #  fk_rails_...  (transaction_type_id => transaction_types.id)
 #
 class Income < ApplicationRecord
+  validates :description, presence: true, length: { minimum: 1, maximum: 150 }
+  validates :amount, numericality: { greater_than: 0 }
+
   belongs_to :budget
   belongs_to :transaction_type
 end
