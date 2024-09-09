@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   scope :api do
     # Budgets
+    get 'budgets/current', to: 'budgets#current', as: :current_budget
     resources :budgets, param: :uid, only: %i[index show create]
-    get 'current', to: 'budgets#current', as: :current_budget
   end
 end

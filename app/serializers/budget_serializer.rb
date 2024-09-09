@@ -25,41 +25,23 @@
 #
 #  fk_rails_...  (budget_account_id => budget_accounts.id)
 #
-class Budget < ApplicationRecord
-  include BudgetSerializer
-
-  validates :uid, uniqueness: true
-  validates :balance, numericality: true
-  validates(
-    :year,
-    numericality: { only_integer: true, greater_than_or_equal_to: 2000, less_than_or_equal_to: Time.zone.now.year }
-  )
-  validates(
-    :month,
-    numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 12 }
-  )
-  validate :unique_uid
-
-  belongs_to :budget_account
-  has_many :incomes, dependent: :destroy
-  has_many :expenses, dependent: :destroy
-
-  before_save :set_uid
+module BudgetSerializer
+  include Serializer
 
   private
 
-  def uid_to_set
-    "#{budget_account.id}_#{year}_#{month.to_s.rjust(2, '0')}"
-  end
-
-  def set_uid
-    self.uid = uid_to_set
-  end
-
-  def unique_uid
-    return unless Budget.find_by(uid: uid_to_set)
-
-    errors.add(:uid, 'already exists for this year and month')
-    throw(:abort)
+  def attributes
+    {
+      id:,
+      uid:,
+      year:,
+      month:,
+      balance:,
+      total_income:,
+      total_expenses:,
+      transaction_count:,
+      income_count:,
+      expense_count:
+    }
   end
 end

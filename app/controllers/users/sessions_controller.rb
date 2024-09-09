@@ -5,17 +5,15 @@ class Users::SessionsController < Devise::SessionsController
 
   def respond_with(resource, _options)
     if user_signed_in?
-      message = "User #{resource.username} signed in successfully"
       data = { user: resource.serialized_hash }
-      response = build_successful_response(:SUCCESS, message:, data:)
+      response = build_successful_response(:SUCCESS, data:)
 
       render json: response, status: :created
     else
-      message = 'You need to sign in to continue'
-      data = {}
-      response = build_successful_response(:SUCCESS, message:, data:)
+      errors = ['you need to be authenticated to access this resource']
+      response = build_error_response(:ERROR_UNAUTHORIZED, errors:)
 
-      render json: response
+      render json: response, status: :unauthorized
     end
   end
 
