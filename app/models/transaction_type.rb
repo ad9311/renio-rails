@@ -19,6 +19,8 @@
 #  fk_rails_...  (budget_account_id => budget_accounts.id)
 #
 class TransactionType < ApplicationRecord
+  include TransactionTypeSerializer
+
   validates :name, length: { minimum: 1, maximum: 25 }
   validates :color, length: { is: 7 }
 

@@ -38,13 +38,17 @@ class Budget < ApplicationRecord
     :month,
     numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 12 }
   )
-  validate :unique_uid
+  validate :unique_uid, on: :create
 
   belongs_to :budget_account
   has_many :incomes, dependent: :destroy
   has_many :expenses, dependent: :destroy
 
   before_save :set_uid
+
+  def default_transaction_type
+    budget_account.transaction_types.find_by(default: true)
+  end
 
   private
 

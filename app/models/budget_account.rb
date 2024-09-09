@@ -19,4 +19,8 @@ class BudgetAccount < ApplicationRecord
   belongs_to :user
   has_many :budgets, dependent: :destroy
   has_many :transaction_types, dependent: :destroy
+
+  def default_transaction_type
+    transaction_types.find_by(default: true)
+  end
 end
