@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get 'budgets/current', to: 'budgets#current', as: :current_budget
     resources :budgets, param: :uid, only: %i[index show create] do
       resources :incomes, only: %i[index show create update destroy]
+      resources :expenses, only: %i[index show create update destroy]
     end
   end
 end

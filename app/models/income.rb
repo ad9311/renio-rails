@@ -23,6 +23,7 @@
 class Income < ApplicationRecord
   include TransactionConcern
   include TransactionConcern::Income
+  include TransactionConcern::Validations
   include IncomeSerializer
 
   before_validation :set_default_type, if: -> { transaction_type_id.nil? }
@@ -39,10 +40,6 @@ class Income < ApplicationRecord
   before_destroy :run_before_destroy
 
   private
-
-  def set_default_type
-    self.transaction_type_id = budget.default_transaction_type.id
-  end
 
   def run_after_create
     increment_transaction_count!
