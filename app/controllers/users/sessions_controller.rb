@@ -1,5 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
-  include Api::ResponseBuilder
+  include ResponseBuilder
 
   private
 

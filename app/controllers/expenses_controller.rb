@@ -1,5 +1,5 @@
 class ExpensesController < ApplicationController
-  include Api::ResponseBuilder
+  include ResponseBuilder
 
   before_action :set_budget
   before_action :set_expense, only: %i[show update destroy]

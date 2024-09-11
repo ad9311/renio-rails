@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  include Api::ResponseBuilder
+  include ResponseBuilder
 
   def me
     message = "Session for #{current_user.username}"

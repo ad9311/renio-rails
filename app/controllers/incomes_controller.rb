@@ -1,5 +1,5 @@
 class IncomesController < ApplicationController
-  include Api::ResponseBuilder
+  include ResponseBuilder
 
   before_action :set_budget
   before_action :set_income, only: %i[show update destroy]

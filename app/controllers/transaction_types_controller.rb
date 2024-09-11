@@ -1,5 +1,5 @@
 class TransactionTypesController < ApplicationController
-  include Api::ResponseBuilder
+  include ResponseBuilder
 
   before_action :set_budget_account
   before_action :set_transaction_type, only: %i[update destroy]
