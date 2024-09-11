@@ -5,7 +5,7 @@ class TransactionTypesController < ApplicationController
   before_action :set_transaction_type, only: %i[update destroy]
 
   def index
-    transaction_types = @budget_account.transaction_types.order(:name)
+    transaction_types = @budget_account.transaction_types.where(default: false).order(:name)
     data = { transaction_types: transaction_types.map(&:serialized_hash) }
     response = build_successful_response(:SUCCESS, data:)
 
