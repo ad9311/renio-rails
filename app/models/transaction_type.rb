@@ -3,9 +3,9 @@
 # Table name: transaction_types
 #
 #  id                :bigint           not null, primary key
-#  color             :string           default("#000000"), not null
-#  default           :boolean          default(TRUE), not null
-#  name              :string           default("DEFAULT"), not null
+#  color             :string           not null
+#  default           :boolean          default(FALSE), not null
+#  name              :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  budget_account_id :bigint           not null

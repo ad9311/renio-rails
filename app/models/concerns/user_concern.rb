@@ -3,6 +3,6 @@ module UserConcern
 
   def set_up_user
     budget_account = BudgetAccount.create(user_id: id)
-    TransactionType.create(budget_account:)
+    TransactionType.create(budget_account:, name: 'DEFAULT', color: '#000000', default: true)
   end
 end
