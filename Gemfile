@@ -44,6 +44,7 @@ group :development do
 
   # Use hirb format query in the console
   gem 'hirb'
-end
 
-gem "dockerfile-rails", ">= 1.6", :group => :development
+  # Use to integrate with docker
+  gem 'dockerfile-rails', '>= 1.6'
+end
