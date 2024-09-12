@@ -5,8 +5,9 @@ class BudgetsController < ApplicationController
   before_action :set_budget, only: %i[show]
 
   def index
+    expenses, income = params[:transactions]&.split(':')
     budgets = @budget_account.budgets.order(uid: :desc)
-    data = { budgets: budgets.map(&:serialized_hash) }
+    data = { budgets: budgets.map { |budget| budget.serialized_hash({ expenses:, income: }) } }
     response = build_successful_response(:SUCCESS, data:)
 
     render json: response
@@ -19,7 +20,8 @@ class BudgetsController < ApplicationController
 
       render json: response, status: :not_found
     else
-      data = { budget: @budget.serialized_hash }
+      expenses, income = params[:transactions]&.split(':')
+      data = { budget: budget.serialized_hash({ expenses:, income: }) }
       response = build_successful_response(:SUCCESS, data:)
 
       render json: response
@@ -50,7 +52,8 @@ class BudgetsController < ApplicationController
 
       render json: response, status: :not_found
     else
-      data = { budget: budget.serialized_hash }
+      expenses, income = params[:transactions]&.split(':')
+      data = { budget: budget.serialized_hash({ expenses:, income: }) }
       response = build_successful_response(:SUCCESS, data:)
 
       render json: response

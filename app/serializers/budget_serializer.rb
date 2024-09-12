@@ -44,11 +44,16 @@ module BudgetSerializer
       expense_count:
     }
 
-    income_list = incomes.map(&:serialized_hash) if options[:income]
-    data = data.merge({ income_list: }) if options[:income]
+    if options[:income]
+      income_list = incomes.map(&:serialized_hash)
+      data = data.merge({ income_list: })
+    end
 
-    expenses = self.expenses.map(&:serialized_hash) if options[:expenses]
-    data = data.merge({ expenses: }) if options[:expenses]
+    if options[:expenses]
+      expenses = self.expenses.map(&:serialized_hash)
+      data = data.merge({ expenses: })
+    end
+
     data
   end
 end
