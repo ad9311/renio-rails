@@ -1,4 +1,4 @@
-module Api::ResponseBuilder
+module ResponseBuilder
   def build_successful_response(status, data: {}, metadata: {})
     { status:, data:, metadata: }
   end

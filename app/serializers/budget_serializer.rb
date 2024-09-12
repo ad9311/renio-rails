@@ -30,8 +30,8 @@ module BudgetSerializer
 
   private
 
-  def attributes
-    {
+  def attributes(options = {})
+    data = {
       id:,
       uid:,
       year:,
@@ -43,5 +43,12 @@ module BudgetSerializer
       income_count:,
       expense_count:
     }
+
+    income_list = incomes.map(&:serialized_hash) if options[:income]
+    data = data.merge({ income_list: }) if options[:income]
+
+    expenses = self.expenses.map(&:serialized_hash) if options[:expenses]
+    data = data.merge({ expenses: }) if options[:expenses]
+    data
   end
 end

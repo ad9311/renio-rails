@@ -23,7 +23,7 @@ module TransactionTypeSerializer
 
   private
 
-  def attributes
+  def attributes(_options = {})
     { id:, name:, color: }
   end
 end

@@ -30,7 +30,7 @@ module UserSerializer
 
   private
 
-  def attributes
+  def attributes(_options = {})
     { id:, username:, name:, email:, image: }
   end
 end

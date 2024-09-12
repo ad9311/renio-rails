@@ -25,7 +25,7 @@ module IncomeSerializer
 
   private
 
-  def attributes
+  def attributes(_options = {})
     { id:, description:, amount:, transaction_type: transaction_type.serialized_hash }
   end
 end
