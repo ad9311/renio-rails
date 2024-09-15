@@ -21,7 +21,7 @@ class BudgetsController < ApplicationController
       render json: response, status: :not_found
     else
       expenses, income = params[:transactions]&.split(':')
-      data = { budget: budget.serialized_hash({ expenses:, income: }) }
+      data = { budget: @budget.serialized_hash({ expenses:, income: }) }
       response = build_successful_response(:SUCCESS, data:)
 
       render json: response

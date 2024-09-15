@@ -2,9 +2,8 @@ class UsersController < ApplicationController
   include ResponseBuilder
 
   def me
-    message = "Session for #{current_user.username}"
     data = { user: current_user.serialized_hash }
-    response = build_successful_response(:SUCCESS, message:, data:)
+    response = build_successful_response(:SUCCESS, data:)
 
     render json: response
   end
