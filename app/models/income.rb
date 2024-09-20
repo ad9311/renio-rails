@@ -23,7 +23,6 @@
 class Income < ApplicationRecord
   include TransactionConcern
   include TransactionConcern::Income
-  include TransactionConcern::Validations
   include IncomeSerializer
 
   validates :description, presence: true, length: { minimum: 1, maximum: 150 }

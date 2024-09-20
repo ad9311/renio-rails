@@ -23,7 +23,6 @@
 class Expense < ApplicationRecord
   include TransactionConcern
   include TransactionConcern::Expense
-  include TransactionConcern::Validations
   include ExpenseSerializer
 
   validates :description, presence: true, length: { minimum: 1, maximum: 150 }
