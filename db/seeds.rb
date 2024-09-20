@@ -1,23 +1,23 @@
 # Transaction types
-names = [
-  'Banking',
-  'Clothing',
-  'Dining out',
-  'Entertainment',
-  'Food Delivery',
-  'Groceries',
-  'Home',
-  'Insurance/Health',
-  'Internet/Cellphone',
-  'Online Shopping',
-  'Other',
-  'Savings',
-  'Subscriptions',
-  'Transportation',
-  'Utilities'
+data = [
+  ['Banking', 'banking'],
+  ['Clothing', 'clothing'],
+  ['Dining out', 'dining_out'],
+  ['Entertainment', 'entertainment'],
+  ['Food Delivery', 'food_delivery'],
+  ['Groceries', 'groceries'],
+  ['Home', 'home'],
+  ['Insurance/Health', 'insurance'],
+  ['Internet/Cellphone', 'internet'],
+  ['Online Shopping', 'online_shopping'],
+  ['Other', 'other'],
+  ['Savings', 'savings'],
+  ['Subscriptions', 'subscriptions'],
+  ['Transportation', 'transportations'],
+  ['Utilities', 'utlities']
 ]
 
-names.each do |name|
-  transaction_type = TransactionType.find_by(name:)
-  TransactionType.create(name:) if transaction_type.nil?
+data.each do |item|
+  transaction_type = TransactionType.find_by(uid: item[1])
+  TransactionType.create(name: item[0], uid: item[1]) if transaction_type.nil?
 end
