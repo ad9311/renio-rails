@@ -21,14 +21,6 @@ module TransactionConcern
     budget.update(transaction_count:)
   end
 
-  module Validations
-    protected
-
-    def set_default_type
-      self.transaction_type_id = budget.default_transaction_type.id
-    end
-  end
-
   module Income
     protected
 

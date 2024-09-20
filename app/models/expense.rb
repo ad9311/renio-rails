@@ -26,8 +26,6 @@ class Expense < ApplicationRecord
   include TransactionConcern::Validations
   include ExpenseSerializer
 
-  before_validation :set_default_type, if: -> { transaction_type_id.nil? }
-
   validates :description, presence: true, length: { minimum: 1, maximum: 150 }
   validates :amount, numericality: { greater_than: 0 }
 
