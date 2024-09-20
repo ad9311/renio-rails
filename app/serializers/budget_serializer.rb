@@ -36,9 +36,9 @@ module BudgetSerializer
       uid:,
       year:,
       month:,
-      balance:,
-      total_income:,
-      total_expenses:,
+      balance: balance.to_f,
+      total_income: total_income.to_f,
+      total_expenses: total_expenses.to_f,
       transaction_count:,
       income_count:,
       expense_count:
