@@ -45,12 +45,12 @@ module BudgetSerializer
     }
 
     if options[:income]
-      income_list = incomes.map(&:serialized_hash)
+      income_list = incomes.order(created_at: :desc).map(&:serialized_hash)
       data = data.merge({ income_list: })
     end
 
     if options[:expenses]
-      expenses = self.expenses.map(&:serialized_hash)
+      expenses = self.expenses.order(created_at: :desc).map(&:serialized_hash)
       data = data.merge({ expenses: })
     end
 
