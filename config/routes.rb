@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   resources :budgets, param: :uid, only: %i[index show create] do
     resources :incomes, only: %i[index show create update destroy]
     resources :expenses, only: %i[index show create update destroy]
-    collection do
-      resources :transaction_types, only: :index
-    end
   end
+
+  # Transaction types
+  resources :transaction_types, only: :index
 end

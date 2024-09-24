@@ -27,6 +27,9 @@ gem 'devise-jwt'
 # Use figaro for managing env variables
 gem 'figaro'
 
+# Use faker for seeds
+gem 'faker'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]

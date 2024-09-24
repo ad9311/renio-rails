@@ -26,6 +26,12 @@ module ExpenseSerializer
   private
 
   def attributes(_options = {})
-    { id:, description:, amount:, transaction_type: transaction_type.serialized_hash }
+    {
+      id:,
+      description:,
+      amount: amount.to_f,
+      transaction_type: transaction_type.serialized_hash,
+      budget_uid: budget.uid
+    }
   end
 end

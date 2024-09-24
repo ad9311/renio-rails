@@ -114,6 +114,8 @@ GEM
       concurrent-ruby (~> 1.0)
       zeitwerk (~> 2.6)
     erubi (1.13.0)
+    faker (3.4.2)
+      i18n (>= 1.8.11, < 2)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     globalid (1.2.1)
@@ -276,6 +278,7 @@ DEPENDENCIES
   devise
   devise-jwt
   dockerfile-rails (>= 1.6)
+  faker
   figaro
   hirb
   pg (~> 1.1)
