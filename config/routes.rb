@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # Budget accounts
+  resources :budget_accounts, only: :index
+
   # Budgets
   get 'budgets/current', to: 'budgets#current', as: :current_budget
   resources :budgets, param: :uid, only: %i[index show create] do
