@@ -45,15 +45,23 @@ class Budget < ApplicationRecord
   has_many :incomes, dependent: :destroy
   has_many :expenses, dependent: :destroy
 
-  scope :current, lambda { |budget_account, incomes: false, expenses: false|
-    current_budget(budget_account, incomes:, expenses:)
+  scope :find_current, lambda { |budget_account, incomes: false, expenses: false|
+    find_current_budget(budget_account, incomes:, expenses:)
   }
 
-  scope :find_by_uid, lambda { |uid, incomes: false, expenses: false|
+  scope :find_record, lambda { |uid, incomes: false, expenses: false|
     by_uid(uid, incomes:, expenses:)
   }
 
   before_save :set_uid
+
+  def self.current(budget_account, incomes: false, expenses: false)
+    find_current(budget_account, incomes:, expenses:).first
+  end
+
+  def self.find_by_uid(uid, incomes: false, expenses: false)
+    find_record(uid, incomes:, expenses:).first
+  end
 
   def default_transaction_type
     budget_account.transaction_types.find_by(default: true)

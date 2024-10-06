@@ -7,7 +7,7 @@ class BudgetAccountsController < ApplicationController
     current_budget = Budget.current(@budget_account)
     if current_budget.nil?
       errors = ['user has no current budget']
-      render json: build_error_response(:ERROR_NOT_FOUND, errors:)
+      render json: build_error_response(:ERROR_NOT_FOUND, errors:), status: :not_found
     else
       last_expense = current_budget.expenses.order(:created_at).last
       data = {
