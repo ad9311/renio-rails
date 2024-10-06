@@ -1,11 +1,8 @@
 module Serializer
   require 'active_support/core_ext/string'
 
-  def serialized_hash(options = {})
-    camelize = options.fetch(:camelize, true)
-    return attributes unless camelize
-
-    attributes(options).transform_keys { |key| key.to_s.camelize(:lower) }
+  def serialized_hash(*)
+    attributes
   end
 
   private

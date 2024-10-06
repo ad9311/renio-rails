@@ -7,8 +7,11 @@ class BudgetAccountsController < ApplicationController
     current_budget = Budget.current(@budget_account)
     data = {
       budget_account: {
-        current_budget:,
-        last_expense: current_budget.expenses.order(:created_at).last
+        current_budget: {
+          uid: current_budget.uid,
+          balance: current_budget.balance,
+          last_expense_amount: current_budget.expenses.order(:created_at).last
+        }
       }
     }
     response = build_successful_response(:SUCCESS, data:)
