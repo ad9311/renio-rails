@@ -44,7 +44,7 @@ module BudgetSerializer
       expense_count:
     }
 
-    data = data.merge({ income_list: budget_incomes }) if options[:income]
+    data = data.merge({ income_list: budget_incomes }) if options[:incomes]
     data = data.merge({ expenses: budget_expenses }) if options[:expenses]
     data
   end

@@ -27,6 +27,7 @@
 #
 class Budget < ApplicationRecord
   include BudgetSerializer
+  extend BudgetConcern::ScopesMethods
 
   validates :uid, uniqueness: true
   validates :balance, numericality: true
@@ -43,6 +44,14 @@ class Budget < ApplicationRecord
   belongs_to :budget_account
   has_many :incomes, dependent: :destroy
   has_many :expenses, dependent: :destroy
+
+  scope :current, lambda { |budget_account, incomes: false, expenses: false|
+    current_budget(budget_account, incomes:, expenses:)
+  }
+
+  scope :find_by_uid, lambda { |uid, incomes: false, expenses: false|
+    by_uid(uid, incomes:, expenses:)
+  }
 
   before_save :set_uid
 

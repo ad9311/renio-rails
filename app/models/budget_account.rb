@@ -22,17 +22,4 @@ class BudgetAccount < ApplicationRecord
   def default_transaction_type
     transaction_types.find_by(default: true)
   end
-
-  # def current_budget(income: false, expenses: false)
-  #   current_date = Time.zone.now
-  #   uid = "#{user.id}_#{current_date.year}_#{current_date.month}"
-
-  #   return Budget.eager_load(:incomes).find_by(uid:) if income
-
-  #   return Budget.eager_load(:expenses).find_by(uid:) if expenses
-
-  #   return Budget.eager_load(%i[incomes expenses]).find_by(uid:) if income && expenses
-
-  #   Budget.find_by(uid:)
-  # end
 end

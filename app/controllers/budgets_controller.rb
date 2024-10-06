@@ -2,6 +2,7 @@ class BudgetsController < ApplicationController
   include ResponseBuilder
 
   before_action :set_budget_account
+  before_action :set_transactions_params, only: %i[show current]
   before_action :set_budget, only: %i[show]
 
   def index
@@ -22,8 +23,7 @@ class BudgetsController < ApplicationController
 
       render json: response, status: :not_found
     else
-      expenses, income = params[:transactions]&.split(':')
-      data = { budget: @budget.serialized_hash({ expenses:, income: }) }
+      data = { budget: @budget.serialized_hash({ incomes: @income_param, expenses: @expenses_param }) }
       response = build_successful_response(:SUCCESS, data:)
 
       render json: response
@@ -46,16 +46,14 @@ class BudgetsController < ApplicationController
   end
 
   def current
-    current_date = Time.zone.now
-    budget = @budget_account.budgets.find_by(year: current_date.year, month: current_date.month)
+    budget = Budget.current(@budget_account, incomes: @income_param, expenses: @expenses_param)
     if budget.nil?
       errors = ['user has no current budget']
       response = build_error_response(:ERROR_NOT_FOUND, errors:)
 
       render json: response, status: :not_found
     else
-      expenses, income = params[:transactions]&.split(':')
-      data = { budget: budget.serialized_hash({ expenses:, income: }) }
+      data = { budget: budget.serialized_hash({ incomes: @income_param, expenses: @expenses_param }) }
       response = build_successful_response(:SUCCESS, data:)
 
       render json: response
@@ -72,7 +70,11 @@ class BudgetsController < ApplicationController
     @budget_account = current_user.budget_account
   end
 
+  def set_transactions_params
+    @expenses_param, @income_param = params[:transactions]&.split(':')
+  end
+
   def set_budget
-    @budget = Budget.find_by(uid: params[:uid])
+    @budget = Budget.find_by_uid(params[:uid], incomes: @income_param, expenses: @expenses_param)
   end
 end
