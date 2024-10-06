@@ -5,12 +5,13 @@ class BudgetAccountsController < ApplicationController
 
   def user
     current_budget = Budget.current(@budget_account)
+    last_expense = current_budget.expenses.order(:created_at).last
     data = {
       budget_account: {
         current_budget: {
           uid: current_budget.uid,
-          balance: current_budget.balance,
-          last_expense_amount: current_budget.expenses.order(:created_at).last
+          balance: current_budget.balance.to_f,
+          last_expense_amount: last_expense.nil? ? nil : last_expense.amount.to_f
         }
       }
     }
