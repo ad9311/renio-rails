@@ -3,8 +3,14 @@ class BudgetAccountsController < ApplicationController
 
   before_action :set_budget_account
 
-  def index
-    data = {}
+  def user
+    current_budget = Budget.current(@budget_account)
+    data = {
+      budget_account: {
+        current_budget:,
+        last_expense: current_budget.expenses.order(:created_at).last
+      }
+    }
     response = build_successful_response(:SUCCESS, data:)
     render json: response
   end

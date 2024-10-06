@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   # Budget accounts
-  resources :budget_accounts, only: :index
+  get '/budget_account', to: 'budget_accounts#user', as: :user_budget_account
 
   # Budgets
   get 'budgets/current', to: 'budgets#current', as: :current_budget
