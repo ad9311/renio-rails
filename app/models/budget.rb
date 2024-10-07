@@ -63,6 +63,14 @@ class Budget < ApplicationRecord
     find_record(uid, incomes:, expenses:).first
   end
 
+  def self.new_date_params
+    current_time = Time.zone.now
+    year = current_time.year
+    month = current_time.month
+
+    { year:, month: }
+  end
+
   def default_transaction_type
     budget_account.transaction_types.find_by(default: true)
   end

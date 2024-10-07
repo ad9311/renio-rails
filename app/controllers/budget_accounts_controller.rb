@@ -7,19 +7,14 @@ class BudgetAccountsController < ApplicationController
     current_budget = Budget.current(@budget_account)
     if current_budget.nil?
       errors = ['user has no current budget']
-      render json: build_error_response(:ERROR_NOT_FOUND, errors:), status: :not_found
+      response = build_error_response(:ERROR_NOT_FOUND, errors:)
+
+      render json: response, status: :not_found
     else
-      last_expense = current_budget.expenses.order(:created_at).last
-      data = {
-        budget_account: {
-          current_budget: {
-            uid: current_budget.uid,
-            balance: current_budget.balance.to_f,
-            last_expense_amount: last_expense.nil? ? nil : last_expense.amount.to_f
-          }
-        }
-      }
-      render json: build_successful_response(:SUCCESS, data:)
+      data = { budget_account: @budget_account.serialized_hash }
+      response = build_successful_response(:SUCCESS, data:)
+
+      render json: response
     end
   end
 

@@ -16,6 +16,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class BudgetAccount < ApplicationRecord
+  include BudgetAccountSerializer
+
   belongs_to :user
   has_many :budgets, dependent: :destroy
 

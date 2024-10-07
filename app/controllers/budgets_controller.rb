@@ -31,7 +31,7 @@ class BudgetsController < ApplicationController
   end
 
   def create
-    budget = @budget_account.budgets.new(budget_params)
+    budget = @budget_account.budgets.new(Budget.new_date_params)
     if budget.save
       data = { budget: budget.serialized_hash }
       response = build_successful_response(:SUCCESS_CREATED, data:)
@@ -61,10 +61,6 @@ class BudgetsController < ApplicationController
   end
 
   private
-
-  def budget_params
-    params.require(:budget).permit(:year, :month)
-  end
 
   def set_budget_account
     @budget_account = current_user.budget_account
