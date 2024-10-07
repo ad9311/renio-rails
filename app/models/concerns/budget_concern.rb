@@ -28,7 +28,7 @@ module BudgetConcern
       current_date = Time.zone.now
       year = current_date.year
       month = current_date.month
-      "#{budget_account.id}_#{year}_#{month.to_s.rjust(2, '0')}"
+      "#{budget_account.id}-#{year}-#{month.to_s.rjust(2, '0')}"
     end
   end
 end

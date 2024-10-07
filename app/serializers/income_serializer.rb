@@ -25,7 +25,7 @@ module IncomeSerializer
 
   private
 
-  def attributes(_options = {})
+  def attributes(*)
     {
       id:,
       description:,

@@ -78,7 +78,7 @@ class Budget < ApplicationRecord
   private
 
   def uid_to_set
-    "#{budget_account.id}_#{year}_#{month.to_s.rjust(2, '0')}"
+    "#{budget_account.id}-#{year}-#{month.to_s.rjust(2, '0')}"
   end
 
   def set_uid

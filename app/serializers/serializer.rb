@@ -1,8 +1,8 @@
 module Serializer
   require 'active_support/core_ext/string'
 
-  def serialized_hash(*)
-    attributes
+  def serialized_hash(options = {})
+    attributes(options)
   end
 
   private

@@ -25,7 +25,7 @@ module ExpenseSerializer
 
   private
 
-  def attributes(_options = {})
+  def attributes(*)
     {
       id:,
       description:,

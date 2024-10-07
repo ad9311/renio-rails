@@ -3,7 +3,7 @@ module <%= class_name %>Serializer
 
   private
 
-  def attributes(_options = {})
+  def attributes(*)
     { id: }
   end
 end

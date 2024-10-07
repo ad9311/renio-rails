@@ -3,7 +3,7 @@ module BudgetAccountSerializer
 
   private
 
-  def attributes(_options = {})
+  def attributes(*)
     data = { id:, current_budget: nil }
     current_budget = Budget.current(self)
     return dara if current_budget.nil?
