@@ -6,11 +6,18 @@ class BudgetsController < ApplicationController
   before_action :set_budget, only: %i[show]
 
   def index
+    if params[:data] == 'count'
+      budget_count = @budget_account.budgets.count
+      data = { budget_count: }
+      response = build_successful_response(:SUCCESS, data:)
+      render(json: response) and return
+    end
+
     expenses, income = params[:transactions]&.split(':')
-    @budgets = @budget_account.budgets.order(uid: :desc).limit(6)
-    @budgets = @budgets.includes(:incomes) if income
-    @budgets = @budgets.includes(:expenses) if expenses
-    data = { budgets: @budgets.map { |budget| budget.serialized_hash({ expenses:, income: }) } }
+    budgets = @budget_account.budgets.order(uid: :desc).limit(6)
+    budgets = budgets.includes(:incomes) if income
+    budgets = budgets.includes(:expenses) if expenses
+    data = { budgets: budgets.map { |budget| budget.serialized_hash({ expenses:, income: }) } }
     response = build_successful_response(:SUCCESS, data:)
 
     render json: response
